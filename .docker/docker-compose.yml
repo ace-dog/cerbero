@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  gsttest:
+    image: ace-dog/cerbero
+    container_name: cerbero
+    build: .
+    privileged: true
+    working_dir: /root/workspace
+    volumes:
+      - ../:/root/workspace
