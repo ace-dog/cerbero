@@ -7,6 +7,7 @@ DOCKER_CONT_NAME=$(basename -s .git `git config --get remote.origin.url`)
 DOCKER_CONT_NAME=$(echo "$DOCKER_CONT_NAME" | tr '[:upper:]' '[:lower:]')
 echo "DOCKER_CONT_NAME $DOCKER_CONT_NAME"
 script_dir=$(dirname "$(readlink -f "$0")")
+echo "script_dir $script_dir"
 Shell=
 Build=
 Remove=
@@ -50,9 +51,9 @@ else
 fi
 
 if [ -n "$Build" ]; then
-    echo "Build Library"
-    # sudo docker exec --workdir /root/workspace $DOCKER_CONT_NAME ./rm_build.sh
-    # sudo docker exec --workdir /root/workspace $DOCKER_CONT_NAME ./run_build.sh Release $BuildArg
+    echo "Building"
+    sudo docker exec --workdir /root/workspace $DOCKER_CONT_NAME ./cerbero-uninstalled -c config/cross-android-universal.cbc bootstrap
+    sudo docker exec --workdir /root/workspace $DOCKER_CONT_NAME ./cerbero-uninstalled -c config/cross-android-universal.cbc package gstreamer-1.0
 fi
 if [ -n "$Shell" ]; then
     echo "Shell into container $DOCKER_CONT_NAME"

@@ -1,6 +1,6 @@
 version: '3.8'
 services:
-  gsttest:
+  cerbero:
     image: ace-dog/cerbero
     container_name: cerbero
     build: .
